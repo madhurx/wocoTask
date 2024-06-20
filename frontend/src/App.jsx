@@ -10,8 +10,8 @@ function App() {
 			<Router>
 				<Routes>
         <Route path="/login" element={<Login/>} />
-                    {/* <Route path="/register" element={Register} />
-                    <Route path="/user-management" element={UserManagement} /> */}
+                    <Route path="/register" element={<Register/>} />
+                   {/*  <Route path="/user-management" element={UserManagement} /> */}
 				</Routes>
 			</Router>
 		</>
