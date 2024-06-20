@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 // import { AuthContext } from '../AuthContext';
 const Register = () => {
 	const [firstName, setFirstName] = useState("");
