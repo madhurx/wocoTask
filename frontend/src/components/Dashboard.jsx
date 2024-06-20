@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../AuthContext';
 // import AuthProvider from '../AuthContext';
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
-    const { logout } = ""
+    const { user, logout } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchUsers = async () => {
