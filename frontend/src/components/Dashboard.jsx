@@ -6,24 +6,24 @@ const Dashboard = () => {
     const [users, setUsers] = useState([]);
     const { logout } = ""
 
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    //         const res = await axios.get('/api/users', {
-    //             headers: {
-    //                 'x-auth-token': localStorage.getItem('token')
-    //             }
-    //         });
-    //         setUsers(res.data);
-    //     };
-    //     fetchUsers();
-    // }, []);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users`, {
+                headers: {
+                    'x-auth-token': localStorage.getItem('token')
+                }
+            });
+            setUsers(res.data);
+        };
+        fetchUsers();
+    }, []);
 
     const handleEdit = async (id) => {
         // Implement edit functionality
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`/api/users/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/users/${id}`, {
             headers: {
                 'x-auth-token': localStorage.getItem('token')
             }

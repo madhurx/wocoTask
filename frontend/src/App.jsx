@@ -5,15 +5,14 @@ import AddUser from "./components/AddUser";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-
 	return (
 		<>
 			<Router>
 				<Routes>
-        <Route path="/login" element={<Login/>} />
-                    <Route path="/register" element={<Register/>} />
-                    <Route path="/add" element={<AddUser/>} />
-                    <Route path="/dashboard" element={<Dashboard/>} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route path="/add" element={<AddUser />} />
+					<Route path="/dashboard" element={<Dashboard />} />
 				</Routes>
 			</Router>
 		</>
