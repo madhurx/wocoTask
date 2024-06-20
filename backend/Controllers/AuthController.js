@@ -33,7 +33,7 @@ const register = async (req, res) => {
 			user: { id: newUser.id, firstName, lastName, email, phone },
 		});
 	} catch (err) {
-    console.log(err.message)
+		console.log(err.message);
 		res.status(500).json({ message: "Server error" });
 	}
 };

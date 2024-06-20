@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
-// import { AuthContext } from '../AuthContext';
+import { AuthContext } from "../AuthContext";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	// const { login } = useContext(AuthContext);
+	const { login } = useContext(AuthContext);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// await login(email, password);
+		await login(email, password);
 	};
 
 	return (
@@ -46,7 +46,7 @@ const Login = () => {
 					</div>
 					<input
 						id="input-group-1"
-						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -68,7 +68,7 @@ const Login = () => {
 					</div>
 					<input
 						id="input-group-1"
-						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}

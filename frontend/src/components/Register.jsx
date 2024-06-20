@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthContext";
 // import { AuthContext } from '../AuthContext';
 const Register = () => {
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [phone, setPhone] = useState("");
-	// const { register } = useContext(AuthContext);
-
+	const [userData, setUserData] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		phone: "",
+		password: "",
+	});
+  const { register } = useContext(AuthContext);
+  
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setUserData({ ...userData, [name]: value });
+	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// await register({ firstName, lastName, email, password });
+		await register(userData);
 	};
 
 	return (
@@ -34,8 +41,6 @@ const Register = () => {
 				</svg>
 			</div>
 
-			
-
 			<form onSubmit={handleSubmit} className="p-6 rounded w-1/3">
 				<div className="flex space-x-3">
 					<div className="relative mb-6">
@@ -50,11 +55,11 @@ const Register = () => {
 							</svg>
 						</div>
 						<input
-							id="input-group-1"
-							className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+							className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 							type="text"
-							value={firstName}
-							onChange={(e) => setFirstName(e.target.value)}
+							name="firstName"
+							value={userData.firstName}
+							onChange={handleChange}
 							placeholder="FIRST NAME"
 							required
 						/>
@@ -72,11 +77,11 @@ const Register = () => {
 							</svg>
 						</div>
 						<input
-							id="input-group-1"
-							className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+							className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 							type="text"
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
+							name="lastName"
+							value={userData.lastName}
+							onChange={handleChange}
 							placeholder="LAST NAME"
 							required
 						/>
@@ -96,11 +101,11 @@ const Register = () => {
 						</svg>
 					</div>
 					<input
-						id="input-group-1"
-						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 						type="email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						name="email"
+						value={userData.email}
+						onChange={handleChange}
 						placeholder="EMAIL"
 						required
 					/>
@@ -121,10 +126,11 @@ const Register = () => {
 					</div>
 					<input
 						id="input-group-1"
-						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 						type="phone"
-						value={phone}
-						onChange={(e) => setPhone(e.target.value)}
+						name="phone"
+						value={userData.phone}
+						onChange={handleChange}
 						placeholder="PHONE"
 						required
 					/>
@@ -143,10 +149,11 @@ const Register = () => {
 					</div>
 					<input
 						id="input-group-1"
-						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-white"
+						className="bg-transparent border border-white text-white text-sm rounded-lg focus:ring-white focus:border-2 focus:border-white block w-full ps-10 p-2.5 placeholder:text-gray-200"
 						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						name="password"
+						value={userData.password}
+						onChange={handleChange}
 						placeholder="PASSWORD"
 						required
 					/>
