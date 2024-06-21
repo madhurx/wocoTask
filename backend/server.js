@@ -3,6 +3,7 @@ const userRoutes = require("./routes/userRoutes");
 const AuthRoutes = require("./routes/authRoutes");
 const mongoose = require("mongoose");
 const cors = require('cors');
+const auth = require("./middleware/auth");
 
 require("dotenv").config();
 
@@ -18,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use("/api/", AuthRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/users" ,userRoutes);
 
 const PORT = process.env.PORT || 5000;
 

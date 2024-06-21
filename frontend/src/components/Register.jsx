@@ -10,6 +10,8 @@ const Register = () => {
 		password: "",
 	});
   const { register } = useContext(AuthContext);
+	const [error, setError] = useState(null);
+
   
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -17,7 +19,10 @@ const Register = () => {
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await register(userData);
+		const errorMessage = await register(userData);
+    if (errorMessage) {
+			setError(errorMessage);
+		}
 	};
 
 	return (
@@ -164,6 +169,8 @@ const Register = () => {
 					className="w-full bg-white text-blue-600 p-2 rounded text-base font-semibold">
 					REGISTER
 				</button>
+				{ error && <div className="text-red-500 tracking-wide text-lg font-normal">{error}</div>}
+
 			</form>
 		</div>
 	);

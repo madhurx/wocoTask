@@ -5,10 +5,14 @@ const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const { login } = useContext(AuthContext);
+	const [error, setError] = useState(null);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await login(email, password);
+		const errorMessage = await login(email, password);
+		if (errorMessage) {
+			setError(errorMessage);
+		}
 	};
 
 	return (
@@ -77,12 +81,16 @@ const Login = () => {
 					/>
 				</div>
 
+
 				<button
 					type="submit"
 					className="w-full bg-white text-blue-600 p-2 rounded text-base font-semibold">
 					LOGIN
 				</button>
+				{ error && <div className="text-red-500 tracking-wide text-lg font-normal">{error}</div>}
+
 			</form>
+      
 		</div>
 	);
 };

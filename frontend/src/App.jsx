@@ -15,10 +15,10 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 
-						{/* <Route path="/" element={<PrivateRoute />}> */}
+						<Route element={<PrivateRoute />}>
 							<Route path="/add" element={<AddUser />} />
 							<Route path="/dashboard" element={<Dashboard />} />
-						{/* </Route> */}
+						</Route>
 					</Routes>
 				</AuthProvider>
 			</Router>
