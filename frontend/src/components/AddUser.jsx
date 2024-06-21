@@ -1,20 +1,93 @@
-import  { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddUser = () => {
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [phone, setPhone] = useState("");
-	// const { register } = useContext(AuthContext);
+const AddUser = ({ userId }) => {
+	const { id: routeId } = useParams();
+	const id = userId || routeId;
+
+	const [userData, setUserData] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		phone: "",
+	});
+	const navigate = useNavigate();
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		if (id) {
+			const fetchUserData = async () => {
+				try {
+					const res = await axios.get(
+						`${import.meta.env.VITE_BACKEND_URL}/api/users/${id}`,
+						{
+							headers: {
+								"x-auth-token": localStorage.getItem("token"),
+							},
+						},
+					);
+					setUserData(res.data);
+				} catch (err) {
+					console.error(err);
+					setError("Failed to load user data");
+				}
+			};
+			fetchUserData();
+		}
+	}, [id]);
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setUserData({ ...userData, [name]: value });
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// await register({ firstName, lastName, email, password });
+		try {
+			if (id) {
+				const res = await axios.put(
+					`${import.meta.env.VITE_BACKEND_URL}/api/users/${id}`,
+					userData,
+					{
+						headers: {
+							"x-auth-token": localStorage.getItem("token"),
+						},
+					},
+				);
+				if (res.data.status === 400) {
+					setError(res.data.message);
+				} else {
+					navigate("/dashboard");
+				}
+			} else {
+				const res = await axios.post(
+					`${import.meta.env.VITE_BACKEND_URL}/api/users/add`,
+					userData,
+					{
+						headers: {
+							"x-auth-token": localStorage.getItem("token"),
+						},
+					},
+				);
+				const data = res.data;
+				if (data.status == 400) {
+					setError(data.message);
+				} else {
+					navigate("/dashboard");
+				}
+			}
+		} catch (err) {
+			console.error(err.response.data);
+			setError(err.response.data.message);
+		}
 	};
 
 	return (
 		<div className="min-h-screen flex items-center justify-center flex-col">
-			<div className="font-semibold text-xl">ADD USER</div>
+			<div className="font-semibold text-xl">
+				{id ? "EDIT USER" : "ADD USER"}
+			</div>
 
 			<form onSubmit={handleSubmit} className="p-6 rounded w-1/3">
 				<div className="flex space-x-3">
@@ -30,11 +103,11 @@ const AddUser = () => {
 							</svg>
 						</div>
 						<input
-							id="input-group-1"
 							className="bg-transparent border border-gray-500 text-gray-600 text-sm rounded-lg focus:ring-gray-600 focus:border-2 focus:border-gray-500 block w-full ps-10 p-2.5 placeholder:text-gray-500"
 							type="text"
-							value={firstName}
-							onChange={(e) => setFirstName(e.target.value)}
+							name="firstName"
+							value={userData.firstName}
+							onChange={handleChange}
 							placeholder="FIRST NAME"
 							required
 						/>
@@ -52,11 +125,11 @@ const AddUser = () => {
 							</svg>
 						</div>
 						<input
-							id="input-group-1"
 							className="bg-transparent border border-gray-500 text-gray-600 text-sm rounded-lg focus:ring-gray-600 focus:border-2 focus:border-gray-500 block w-full ps-10 p-2.5 placeholder:text-gray-500"
 							type="text"
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
+							name="lastName"
+							value={userData.lastName}
+							onChange={handleChange}
 							placeholder="LAST NAME"
 							required
 						/>
@@ -76,11 +149,11 @@ const AddUser = () => {
 						</svg>
 					</div>
 					<input
-						id="input-group-1"
 						className="bg-transparent border border-gray-500 text-gray-600 text-sm rounded-lg focus:ring-gray-600 focus:border-2 focus:border-gray-500 block w-full ps-10 p-2.5 placeholder:text-gray-500"
 						type="email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						name="email"
+						value={userData.email}
+						onChange={handleChange}
 						placeholder="EMAIL"
 						required
 					/>
@@ -100,11 +173,11 @@ const AddUser = () => {
 						</svg>
 					</div>
 					<input
-						id="input-group-1"
 						className="bg-transparent border border-gray-500 text-gray-600 text-sm rounded-lg focus:ring-gray-600 focus:border-2 focus:border-gray-500 block w-full ps-10 p-2.5 placeholder:text-gray-500"
 						type="phone"
-						value={phone}
-						onChange={(e) => setPhone(e.target.value)}
+						name="phone"
+						value={userData.phone}
+						onChange={handleChange}
 						placeholder="PHONE"
 						required
 					/>
@@ -113,8 +186,13 @@ const AddUser = () => {
 				<button
 					type="submit"
 					className="w-full text-white bg-blue-600 p-2 rounded text-base font-semibold">
-					SAVE
+					{id ? "UPDATE" : "SAVE"}
 				</button>
+				{error && (
+					<div className="text-red-500 tracking-wide text-lg font-normal">
+						{error}
+					</div>
+				)}
 			</form>
 		</div>
 	);

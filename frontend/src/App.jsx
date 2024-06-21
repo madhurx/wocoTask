@@ -18,6 +18,7 @@ function App() {
 						<Route element={<PrivateRoute />}>
 							<Route path="/add" element={<AddUser />} />
 							<Route path="/dashboard" element={<Dashboard />} />
+							<Route path="/edit/:id" element={<AddUser />} />
 						</Route>
 					</Routes>
 				</AuthProvider>

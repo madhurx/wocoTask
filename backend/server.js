@@ -19,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use("/api/", AuthRoutes);
-app.use("/api/users" ,userRoutes);
+app.use("/api/users",auth ,userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
