@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 
 const PrivateRoute = () => {
 	const { user, loading } = useContext(AuthContext);
-	console.log("private", user, loading);
 
 	if (loading) {
 		return <div>Loading...</div>;

@@ -24,7 +24,6 @@ const register = async (req, res) => {
 			.json({ status: 400, message: "Last Name is not properly formatted" });
 	}
 
-	// Validate email
 	if (!validator.isEmail(email)) {
 		return res
 			.status(400)
