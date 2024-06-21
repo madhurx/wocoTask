@@ -39,24 +39,33 @@ const Dashboard = () => {
 
 	return (
 		<div className="min-h-screen flex flex-col  bg-slate-100 p-4">
-			<h1 className="text-3xl font-bold mb-4 text-center">Dashboard</h1>
-			<div>
+			<div className="bg-white p-4">
 				<button
 					type="button"
 					onClick={() => navigate("/add")}
 					className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2  ">
-					ADD NEW USER
+					+ ADD NEW USER
 				</button>
 			</div>
 			<div className="items-center">
-				<table className="min-w-full bg-white rounded-md shadow-md border-separate  border-spacing-x-4">
+				<table className="min-w-full bg-white rounded-md shadow-md border-separate  border-spacing-x-4 pb-4">
 					<thead className="">
 						<tr className="text-gray-500 text-sm text-left">
-							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">#</th>
-							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Full Name</th>
-							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Phone</th>
-							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Email</th>
-							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Created Date</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">
+								#
+							</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">
+								Full Name
+							</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">
+								Phone
+							</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">
+								Email
+							</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">
+								Created Date
+							</th>
 							<th className="py-2 px-4  border-b-2 border-slate-200"></th>
 						</tr>
 					</thead>
@@ -65,10 +74,16 @@ const Dashboard = () => {
 							<tr
 								key={user._id}
 								className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
-								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{index + 1}</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">
+									{index + 1}
+								</td>
 								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{`${user.firstName} ${user.lastName}`}</td>
-								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{user.phone}</td>
-								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{user.email}</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">
+									{user.phone}
+								</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">
+									{user.email}
+								</td>
 								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">
 									{new Date(user.createdAt).toLocaleDateString()}
 								</td>

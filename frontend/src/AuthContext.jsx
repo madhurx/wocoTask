@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
 				localStorage.removeItem("token");
 			}
 		}
-		setLoading(false); // Authentication check is complete
+		setLoading(false);
 	}, []);
 
 	const register = async (userData) => {

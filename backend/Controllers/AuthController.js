@@ -55,9 +55,13 @@ const register = async (req, res) => {
 
 		await newUser.save();
 
-		const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
-			expiresIn: 3600,
-		});
+		const token = jwt.sign(
+			{ id: newUser.id, fullName: firstName + " " + lastName },
+			process.env.JWT_SECRET,
+			{
+				expiresIn: 3600,
+			},
+		);
 		res.json({
 			token,
 			user: { id: newUser.id, firstName, lastName, email, phone },
@@ -92,9 +96,13 @@ const login = async (req, res) => {
 				.json({ status: 400, message: "Invalid credentials" });
 		}
 
-		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-			expiresIn: 3600,
-		});
+		const token = jwt.sign(
+			{ id: user.id, fullName: user.firstName + " " + user.lastName },
+			process.env.JWT_SECRET,
+			{
+				expiresIn: 3600,
+			},
+		);
 		res.json({
 			token,
 			user: {

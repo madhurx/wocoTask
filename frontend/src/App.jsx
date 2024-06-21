@@ -5,6 +5,7 @@ import AddUser from "./components/AddUser";
 import Dashboard from "./components/Dashboard";
 import AuthProvider from "./AuthContext";
 import PrivateRoute from "./PrivateRoute";
+import IndexPage from "./components/IndexPage";
 
 function App() {
 	return (
@@ -12,6 +13,7 @@ function App() {
 			<Router>
 				<AuthProvider>
 					<Routes>
+						<Route path="/" element={<IndexPage />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 

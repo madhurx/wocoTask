@@ -84,7 +84,7 @@ const AddUser = ({ userId }) => {
 	};
 
 	return (
-		<div className="min-h-screen flex items-center justify-center flex-col">
+		<div className="min-h-screen flex items-center justify-center flex-col bg-slate-100">
 			<div className="font-semibold text-xl">
 				{id ? "EDIT USER" : "ADD USER"}
 			</div>
