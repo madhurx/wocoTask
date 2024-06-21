@@ -37,12 +37,8 @@ const Dashboard = () => {
 		setUsers(users.filter((user) => user._id !== id));
 	};
 
-	const handleAdd = async () => {
-		// Implement add functionality
-	};
-
 	return (
-		<div className="min-h-screen flex flex-col  bg-gray-100 p-4">
+		<div className="min-h-screen flex flex-col  bg-slate-100 p-4">
 			<h1 className="text-3xl font-bold mb-4 text-center">Dashboard</h1>
 			<div>
 				<button
@@ -53,39 +49,69 @@ const Dashboard = () => {
 				</button>
 			</div>
 			<div className="items-center">
-				<table className="min-w-full bg-white rounded-md shadow-md">
-					<thead>
-						<tr>
-							<th className="py-2 px-4 border-r">S.No</th>
-							<th className="py-2 px-4 border-r">Full Name</th>
-							<th className="py-2 px-4 border-r">Phone</th>
-							<th className="py-2 px-4 border-r">Email</th>
-							<th className="py-2 px-4 border-r">Created Date</th>
-							<th className="py-2 px-4 border-r">Actions</th>
+				<table className="min-w-full bg-white rounded-md shadow-md border-separate  border-spacing-x-4">
+					<thead className="">
+						<tr className="text-gray-500 text-sm text-left">
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">#</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Full Name</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Phone</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Email</th>
+							<th className="py-2 px-4 border-r-2 border-b-2 border-slate-200">Created Date</th>
+							<th className="py-2 px-4  border-b-2 border-slate-200"></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="font-normal text-sm">
 						{users.map((user, index) => (
 							<tr
 								key={user._id}
 								className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
-								<td className="py-2 px-4 border-r">{index + 1}</td>
-								<td className="py-2 px-4 border-r">{`${user.firstName} ${user.lastName}`}</td>
-								<td className="py-2 px-4 border-r">{user.phone}</td>
-								<td className="py-2 px-4 border-r">{user.email}</td>
-								<td className="py-2 px-4 border-r">
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{index + 1}</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{`${user.firstName} ${user.lastName}`}</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{user.phone}</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">{user.email}</td>
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">
 									{new Date(user.createdAt).toLocaleDateString()}
 								</td>
-								<td className="py-2 px-4 border-r">
+								<td className="py-2 px-4 border-r-2 border-slate-200 border-b-2">
 									<button
 										onClick={() => handleEdit(user._id)}
-										className="bg-yellow-500 text-white px-2 py-1 rounded mr-2">
-										Edit
+										className=" px-2 py-1 rounded mr-2">
+										<svg
+											className="w-6 h-6 text-gray-800 "
+											aria-hidden="true"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											fill="none"
+											viewBox="0 0 24 24">
+											<path
+												stroke="currentColor"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+											/>
+										</svg>
 									</button>
 									<button
 										onClick={() => handleDelete(user._id)}
-										className="bg-red-500 text-white px-2 py-1 rounded mr-2">
-										Delete
+										className=" px-2 py-1 rounded mr-2">
+										<svg
+											className="w-6 h-6 text-gray-800 "
+											aria-hidden="true"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											fill="none"
+											viewBox="0 0 24 24">
+											<path
+												stroke="currentColor"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+											/>
+										</svg>
 									</button>
 								</td>
 							</tr>
