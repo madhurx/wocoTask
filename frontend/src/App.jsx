@@ -22,6 +22,7 @@ function App() {
 							<Route path="/dashboard" element={<Dashboard />} />
 							<Route path="/edit/:id" element={<AddUser />} />
 						</Route>
+            <Route path="*" element={<IndexPage />} />
 					</Routes>
 				</AuthProvider>
 			</Router>
